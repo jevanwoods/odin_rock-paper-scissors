@@ -5,7 +5,7 @@ var choices = ["ROCK", "PAPER", "SCISSORS"];
 var computerChoice = '';
 
 function computerSelector() {
-    var computerChoice = choices[Math.floor(Math.random()*choices.length)];
+    computerChoice = choices[Math.floor(Math.random()*choices.length)];
     console.log("The Computer chose " + computerChoice);
     };
 
@@ -13,46 +13,79 @@ function computerSelector() {
 var playerChoice = '';
 
 function selectedRock() {
-    var playerChoice = 'ROCK';
+    playerChoice = 'ROCK';
     console.log("The Player chose " + playerChoice);
 };
 
 function selectedPaper() {
-    var playerChoice = 'PAPER';
+    playerChoice = 'PAPER';
     console.log("The Player chose " + playerChoice);
 };
 
 function selectedScissors() {
-    var playerChoice = 'SCISSORS';
+    playerChoice = 'SCISSORS';
     console.log("The Player chose " + playerChoice);
 };
 
+// The Result
+var result = '';
+
 // The comparison
 function play() {
-    console.log(playerChoice);
-    console.log(computerChoice);
     if (playerChoice === computerChoice) {
+        result = 'Tie';
         console.log("Tie");
     } else if (playerChoice === "ROCK" && computerChoice === "PAPER") {
+        result = 'Loss';
         console.log("You lose");
     } else if (playerChoice === "ROCK" && computerChoice === "SCISSORS") {
+        result = 'Win';
         console.log("You win");
     } else if (playerChoice === "PAPER" && computerChoice === "SCISSORS") {
+        result = 'Loss';
         console.log("You lose");
     } else if (playerChoice === "PAPER" && computerChoice === "ROCK") {
+        result = 'Win';
         console.log("You win");
     } else if (playerChoice === "SCISSORS" && computerChoice === "ROCK") {
+        result = 'Loss';
         console.log("You lose");
     } else if (playerChoice === "SCISSORS" && computerChoice === "PAPER") {
+        result = 'Win';
         console.log("You win");
     } else {
         console.log("Invalid Entry");
     }
 };
 
+// Set the Scores
+var playerScore = 0;
+
+var computerScore = 0;
+
+// Tally the score
+function scoreTally() {
+    if (result === 'Win') {
+        playerScore += 1;
+        const playerScoreParagraph = document.createElement('p');
+        playerScoreParagraph.textContent = playerScore;
+        plyScoreCont.appendChild(playerScoreParagraph);
+    } else if (result === 'Loss') {
+        computerScore += 1;
+        const computerScoreParagraph = document.createElement('p');
+        computerScoreParagraph.textContent = computerScore;
+        cptScoreCont.appendChild(computerScoreParagraph);
+    }
+    console.log("Player Score is " + playerScore);
+    console.log("Player Score is " + computerScore);
+};
+
 // Connect to the DOM
 const container = document.querySelector('#container');
-
+const plyScoreCont = document.querySelector('#playerScore');
+const cptScoreCont = document.querySelector('#computerScore');
+const winAnnounce = document.querySelector('#winBox');
+const lossAnnounce = document.querySelector('#winBox');
 
 // Play the game on click
 rock.addEventListener("click",clickRock);
@@ -69,6 +102,8 @@ function clickRock(e) {
     selectedRock();
     computerSelector();
     play();
+    scoreTally();
+    winAnnoucement();
 };
 
 function clickPaper(e) {
@@ -79,6 +114,8 @@ function clickPaper(e) {
     selectedPaper();
     computerSelector();
     play();
+    scoreTally();
+    winAnnoucement();
 };
 
 function clickScissors(e) {
@@ -89,4 +126,18 @@ function clickScissors(e) {
     selectedScissors();
     computerSelector();
     play();
+    scoreTally();
+    winAnnoucement();
+};
+
+function winAnnoucement() {
+    if (playerScore === 5) {
+        const winAnnounced = document.createElement('p');
+        winAnnounced.textContent = 'You win!';
+        winAnnounce.appendChild(winAnnounced);
+    } else if (computerScore === 5) {
+        const lossAnnounced = document.createElement('p');
+        lossAnnounced.textContent = 'You lose!';
+        lossAnnounce.appendChild(lossAnnounced);
+    }
 };
