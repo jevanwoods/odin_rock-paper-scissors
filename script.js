@@ -1,41 +1,92 @@
-// Make an array giving the choices for the computer
+// Choices array
 var choices = ["ROCK", "PAPER", "SCISSORS"];
 
-// Make a function that lets the computer pick randomly from the array
-let computerChoice = choices[Math.floor(Math.random()*choices.length)];
+// Computer Choice 
+var computerChoice = '';
 
-// Log that decision in console to assure it's functioning
-console.log(computerChoice);
+function computerSelector() {
+    var computerChoice = choices[Math.floor(Math.random()*choices.length)];
+    console.log("The Computer chose " + computerChoice);
+    };
 
-// Make a prompt to get the players choice
-var playerChoice = prompt("Rock, Paper, or Scissors?");
+// Player Choice
+var playerChoice = '';
 
-// Make playerChoice uniform for comparison
-let uniformChoice = playerChoice.toUpperCase();
+function selectedRock() {
+    var playerChoice = 'ROCK';
+    console.log("The Player chose " + playerChoice);
+};
 
-// Log that player choice to assure it's functioning
-console.log(uniformChoice);
+function selectedPaper() {
+    var playerChoice = 'PAPER';
+    console.log("The Player chose " + playerChoice);
+};
 
-// Compare two choices
-function play(uniformChoice, computerChoice) {
-    if (uniformChoice === computerChoice) {
+function selectedScissors() {
+    var playerChoice = 'SCISSORS';
+    console.log("The Player chose " + playerChoice);
+};
+
+// The comparison
+function play() {
+    console.log(playerChoice);
+    console.log(computerChoice);
+    if (playerChoice === computerChoice) {
         console.log("Tie");
-    } else if (uniformChoice === "ROCK" && computerChoice === "PAPER") {
+    } else if (playerChoice === "ROCK" && computerChoice === "PAPER") {
         console.log("You lose");
-    } else if (uniformChoice === "ROCK" && computerChoice === "SCISSORS") {
+    } else if (playerChoice === "ROCK" && computerChoice === "SCISSORS") {
         console.log("You win");
-    } else if (uniformChoice === "PAPER" && computerChoice === "SCISSORS") {
+    } else if (playerChoice === "PAPER" && computerChoice === "SCISSORS") {
         console.log("You lose");
-    } else if (uniformChoice === "PAPER" && computerChoice === "ROCK") {
+    } else if (playerChoice === "PAPER" && computerChoice === "ROCK") {
         console.log("You win");
-    } else if (uniformChoice === "SCISSORS" && computerChoice === "ROCK") {
+    } else if (playerChoice === "SCISSORS" && computerChoice === "ROCK") {
         console.log("You lose");
-    } else if (uniformChoice === "SCISSORS" && computerChoice === "PAPER") {
+    } else if (playerChoice === "SCISSORS" && computerChoice === "PAPER") {
         console.log("You win");
     } else {
         console.log("Invalid Entry");
     }
-}
+};
 
-// Play the game
-play(uniformChoice, computerChoice);
+// Connect to the DOM
+const container = document.querySelector('#container');
+
+
+// Play the game on click
+rock.addEventListener("click",clickRock);
+
+paper.addEventListener("click",clickPaper);
+
+scissors.addEventListener("click",clickScissors);
+
+function clickRock(e) {
+    const rockChoice = document.createElement('div');
+    rockChoice.textContent = 'You chose rock!';
+    container.appendChild(rockChoice);
+    console.log('Rock Clicked');
+    selectedRock();
+    computerSelector();
+    play();
+};
+
+function clickPaper(e) {
+    const paperChoice = document.createElement('div');
+    paperChoice.textContent = 'You chose paper!';
+    container.appendChild(paperChoice);
+    console.log('Paper Clicked');
+    selectedPaper();
+    computerSelector();
+    play();
+};
+
+function clickScissors(e) {
+    const scissorsChoice = document.createElement('div');
+    scissorsChoice.textContent = 'You chose scissors!';
+    container.appendChild(scissorsChoice);
+    console.log('Scissors Clicked');
+    selectedScissors();
+    computerSelector();
+    play();
+};
